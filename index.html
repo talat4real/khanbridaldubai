@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Bridal Boutique — Online Collection</title>
+  <meta name="description" content="Shop bridal gowns & accessories. Order via Instagram DM or WhatsApp." />
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --card:#f9fafb;
+      --accent:#111827;
+      --shadow: 0 10px 25px rgba(17,24,39,.08);
+      --radius:18px;
+      --radius2:14px;
+      --max:1160px;
+      --pad:18px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--font);
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.4;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 var(--pad)}
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      background:rgba(255,255,255,.86);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:700; letter-spacing:.2px;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background:linear-gradient(135deg,#111827,#6b7280);
+    }
+    nav{display:flex; gap:18px; align-items:center; color:var(--muted); font-size:14px}
+    nav a:hover{color:var(--text)}
+    .cta-row{display:flex; gap:10px; align-items:center}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-weight:600;
+      font-size:14px;
+      cursor:pointer;
+      transition:.15s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{transform: translateY(-1px); box-shadow: var(--shadow)}
+    .btn.primary{
+      background:var(--accent);
+      border-color:var(--accent);
+      color:#fff;
+    }
+
+    .hero{
+      padding:46px 0 18px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    .hero-card{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:26px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .kicker{color:var(--muted); font-weight:600; font-size:13px; letter-spacing:.12em; text-transform:uppercase}
+    h1{margin:10px 0 10px; font-size:44px; line-height:1.05}
+    .lead{color:var(--muted); font-size:16px; margin:0 0 18px}
+    .badges{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .badge{
+      border:1px solid var(--line);
+      background:var(--card);
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .hero-media{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background: linear-gradient(135deg, #f3f4f6, #fff);
+      box-shadow: var(--shadow);
+      position:relative;
+      min-height:320px;
+    }
+    .hero-media img{
+      width:100%; height:100%; object-fit:cover; display:block;
+    }
+    .media-overlay{
+      position:absolute; inset:auto 14px 14px 14px;
+      background:rgba(255,255,255,.92);
+      border:1px solid var(--line);
+      border-radius: 16px;
+      padding:12px 12px;
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+    }
+    .mini{font-size:13px; color:var(--muted)}
+    .mini strong{color:var(--text)}
+    .section{padding:22px 0}
+    .section-title{
+      display:flex; justify-content:space-between; align-items:flex-end; gap:12px;
+      margin:10px 0 14px;
+    }
+    .section-title h2{margin:0; font-size:24px}
+    .section-title p{margin:0; color:var(--muted); font-size:14px}
+
+    .filters{
+      display:flex; gap:10px; flex-wrap:wrap;
+      padding:10px;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background:#fff;
+    }
+    .input, select{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:10px 12px;
+      font-size:14px;
+      outline:none;
+      background:#fff;
+    }
+    .input{min-width:240px}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+      margin-top:14px;
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background:#fff;
+      transition:.15s ease;
+    }
+    .card:hover{transform: translateY(-2px); box-shadow: var(--shadow)}
+    .card img{
+      width:100%; height:320px; object-fit:cover; display:block;
+      background: #f3f4f6;
+    }
+    .card-body{padding:14px}
+    .card-top{display:flex; justify-content:space-between; gap:10px; align-items:flex-start}
+    .name{font-weight:700}
+    .price{font-weight:700}
+    .meta{color:var(--muted); font-size:13px; margin-top:6px}
+    .actions{
+      display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;
+    }
+    .pill{
+      border:1px solid var(--line);
+      background:var(--card);
+      border-radius:999px;
+      padding:8px 10px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .how{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .how .step{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:16px;
+      background:#fff;
+    }
+    .step b{display:block; margin-bottom:6px}
+    .footer{
+      border-top:1px solid var(--line);
+      margin-top:26px;
+      padding:18px 0 28px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns:1fr; }
+      .grid{grid-template-columns: repeat(2, 1fr);}
+      h1{font-size:38px}
+      .hero-media{min-height:260px}
+      .how{grid-template-columns:1fr}
+    }
+    @media (max-width: 540px){
+      .grid{grid-template-columns: 1fr;}
+      .input{min-width: 100%}
+      nav{display:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <header>
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <div style="font-size:15px">Your Bridal Boutique</div>
+            <div style="font-size:12px; color:var(--muted); font-weight:600">Online Collection</div>
+          </div>
+        </div>
+
+        <nav aria-label="Main">
+          <a href="#collection">Collection</a>
+          <a href="#how">How to Order</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="cta-row">
+          <a class="btn" id="igTop" href="#" target="_blank" rel="noopener">Instagram DM</a>
+          <a class="btn primary" id="waTop" href="#" target="_blank" rel="noopener">WhatsApp Order</a>
+        </div>
+      </header>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="hero-card">
+            <div class="kicker">Bridal • Made to shine</div>
+            <h1>Discover your perfect look.</h1>
+            <p class="lead">
+              Browse our bridal collection and order directly through <b>Instagram DM</b> or <b>WhatsApp</b>.
+              Fast replies, sizing help, and worldwide shipping options.
+            </p>
+            <div class="cta-row" style="margin-top:10px; flex-wrap:wrap">
+              <a class="btn primary" href="#collection">Shop the Collection</a>
+              <a class="btn" href="#how">How ordering works</a>
+            </div>
+            <div class="badges">
+              <div class="badge">New arrivals weekly</div>
+              <div class="badge">Custom sizing support</div>
+              <div class="badge">Worldwide delivery</div>
+            </div>
+          </div>
+
+          <div class="hero-media" aria-label="Hero image">
+            <!-- Replace this image with your own -->
+            <img src="https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?auto=format&fit=crop&w=1600&q=80" alt="Bridal collection preview">
+            <div class="media-overlay">
+              <div class="mini">
+                <strong>See something you love?</strong><br/>
+                Send the Product Code to order.
+              </div>
+              <a class="btn primary" href="#collection">View Collection</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="collection">
+      <div class="wrap">
+        <div class="section-title">
+          <div>
+            <h2>Collection</h2>
+            <p>Tap an item to order via WhatsApp or Instagram DM.</p>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <span class="pill">Order via DM</span>
+            <span class="pill">No online checkout</span>
+          </div>
+        </div>
+
+        <div class="filters" role="search">
+          <input class="input" id="search" placeholder="Search (e.g., satin, lace, mermaid)..." />
+          <select id="category">
+            <option value="all">All categories</option>
+            <option value="Gowns">Gowns</option>
+            <option value="Veils">Veils</option>
+            <option value="Accessories">Accessories</option>
+          </select>
+          <select id="sort">
+            <option value="featured">Sort: Featured</option>
+            <option value="price-asc">Price: Low → High</option>
+            <option value="price-desc">Price: High → Low</option>
+            <option value="name-asc">Name: A → Z</option>
+          </select>
+        </div>
+
+        <div class="grid" id="grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="wrap">
+        <div class="section-title">
+          <div>
+            <h2>How to Order</h2>
+            <p>Simple ordering through Instagram or WhatsApp.</p>
+          </div>
+        </div>
+
+        <div class="how">
+          <div class="step">
+            <b>1) Choose your item</b>
+            Find a design you love and note its <b>Product Code</b>.
+          </div>
+          <div class="step">
+            <b>2) Message us</b>
+            Click “WhatsApp Order” or “Instagram DM” and send the code + your size.
+          </div>
+          <div class="step">
+            <b>3) Confirm & pay</b>
+            We confirm availability, price, shipping, then send payment instructions.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="section-title">
+          <div>
+            <h2>Contact</h2>
+            <p>We reply quickly during business hours.</p>
+          </div>
+        </div>
+
+        <div class="hero-card" style="box-shadow:none">
+          <div style="display:flex; gap:12px; flex-wrap:wrap">
+            <a class="btn primary" id="waBottom" href="#" target="_blank" rel="noopener">WhatsApp Order</a>
+            <a class="btn" id="igBottom" href="#" target="_blank" rel="noopener">Instagram DM</a>
+            <a class="btn" id="tel" href="#">Call</a>
+            <a class="btn" id="email" href="#">Email</a>
+          </div>
+          <p class="meta" style="margin-top:12px">
+            Tip: For fastest service, send: <b>Product Code</b>, <b>your size</b>, and <b>wedding date</b>.
+          </p>
+        </div>
+
+        <div class="footer">
+          © <span id="year"></span> Your Bridal Boutique. All rights reserved.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // ====== CONFIG: Replace these with YOUR real links/numbers ======
+    const BRAND = {
+      instagramHandle: "yourbrand", // without @
+      whatsappNumberE164: "+994501234567", // example: +994...
+      phone: "+994 50 123 45 67",
+      email: "hello@yourbrand.com"
+    };
+
+    // Optional: WhatsApp prefilled message template
+    function waLink(message){
+      const num = BRAND.whatsappNumberE164.replace(/\D/g,'');
+      return `https://wa.me/${num}?text=${encodeURIComponent(message)}`;
+    }
+    function igDmLink(){
+      // Works best on mobile; for desktop you can link to profile.
+      return `https://ig.me/m/${BRAND.instagramHandle}`;
+    }
+
+    // ====== PRODUCTS: Replace images, names, prices, codes, categories ======
+    const products = [
+      {
+        code: "BR-001",
+        name: "Luna Satin Gown",
+        category: "Gowns",
+        price: 980,
+        currency: "AZN",
+        tags: ["Satin", "Minimal", "A-line"],
+        img: "https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        code: "BR-002",
+        name: "Elara Lace Mermaid",
+        category: "Gowns",
+        price: 1250,
+        currency: "AZN",
+        tags: ["Lace", "Mermaid", "Classic"],
+        img: "https://images.unsplash.com/photo-1520975958225-9a09d3a85b17?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        code: "BR-003",
+        name: "Pearl Cathedral Veil",
+        category: "Veils",
+        price: 180,
+        currency: "AZN",
+        tags: ["Pearl", "Cathedral", "New"],
+        img: "https://images.unsplash.com/photo-1522338140262-f46f5913618a?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        code: "BR-004",
+        name: "Crystal Hairpiece",
+        category: "Accessories",
+        price: 95,
+        currency: "AZN",
+        tags: ["Crystal", "Sparkle", "Gift"],
+        img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        code: "BR-005",
+        name: "Rosé Tulle Gown",
+        category: "Gowns",
+        price: 1100,
+        currency: "AZN",
+        tags: ["Tulle", "Romantic", "Soft"],
+        img: "https://images.unsplash.com/photo-1542062703-3cdbb0b5f4e6?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        code: "BR-006",
+        name: "Silk Bow Veil",
+        category: "Veils",
+        price: 140,
+        currency: "AZN",
+        tags: ["Silk", "Bow", "Modern"],
+        img: "https://images.unsplash.com/photo-1520975693411-b5e1f8b36a57?auto=format&fit=crop&w=1200&q=80"
+      }
+    ];
+
+    // ====== Render / Interactions ======
+    const grid = document.getElementById("grid");
+    const search = document.getElementById("search");
+    const category = document.getElementById("category");
+    const sort = document.getElementById("sort");
+
+    function money(p){ return `${p.currency} ${p.price.toLocaleString()}`; }
+
+    function orderMessage(p){
+      return `Hi! I want to order:\n` +
+             `• Product Code: ${p.code}\n` +
+             `• Item: ${p.name}\n` +
+             `• Size: (write size)\n` +
+             `• Color: (optional)\n` +
+             `• Wedding date: (optional)\n` +
+             `Thank you!`;
+    }
+
+    function card(p){
+      const wa = waLink(orderMessage(p));
+      const ig = igDmLink();
+      return `
+        <article class="card">
+          <img src="${p.img}" alt="${p.name}">
+          <div class="card-body">
+            <div class="card-top">
+              <div>
+                <div class="name">${p.name}</div>
+                <div class="meta">${p.category} • <b>Code:</b> ${p.code}</div>
+              </div>
+              <div class="price">${money(p)}</div>
+            </div>
+            <div class="meta">${p.tags.map(t=>`<span class="pill">${t}</span>`).join(" ")}</div>
+            <div class="actions">
+              <a class="btn primary" href="${wa}" target="_blank" rel="noopener">WhatsApp Order</a>
+              <a class="btn" href="${ig}" target="_blank" rel="noopener">Instagram DM</a>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function applyFilters(){
+      const q = (search.value || "").toLowerCase().trim();
+      const cat = category.value;
+
+      let list = products.filter(p=>{
+        const hit =
+          p.name.toLowerCase().includes(q) ||
+          p.code.toLowerCase().includes(q) ||
+          p.category.toLowerCase().includes(q) ||
+          p.tags.join(" ").toLowerCase().includes(q);
+        const catOk = (cat === "all") || (p.category === cat);
+        return hit && catOk;
+      });
+
+      const s = sort.value;
+      if(s === "price-asc") list.sort((a,b)=>a.price-b.price);
+      if(s === "price-desc") list.sort((a,b)=>b.price-a.price);
+      if(s === "name-asc") list.sort((a,b)=>a.name.localeCompare(b.name));
+
+      grid.innerHTML = list.map(card).join("");
+    }
+
+    // Set top/bottom contact links
+    const waTop = document.getElementById("waTop");
+    const waBottom = document.getElementById("waBottom");
+    const igTop = document.getElementById("igTop");
+    const igBottom = document.getElementById("igBottom");
+    const tel = document.getElementById("tel");
+    const email = document.getElementById("email");
+    const year = document.getElementById("year");
+
+    const generalMsg = "Hi! I want to order from your bridal collection. Can you help me?";
+    waTop.href = waLink(generalMsg);
+    waBottom.href = waLink(generalMsg);
+    igTop.href = igDmLink();
+    igBottom.href = igDmLink();
+    tel.href = `tel:${BRAND.phone.replace(/\s/g,'')}`;
+    email.href = `mailto:${BRAND.email}`;
+    year.textContent = new Date().getFullYear();
+
+    // Events
+    search.addEventListener("input", applyFilters);
+    category.addEventListener("change", applyFilters);
+    sort.addEventListener("change", applyFilters);
+
+    applyFilters();
+  </script>
+</body>
+</html>
